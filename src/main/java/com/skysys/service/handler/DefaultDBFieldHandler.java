@@ -16,12 +16,15 @@ public class DefaultDBFieldHandler implements MetaObjectHandler {
     public void insertFill(MetaObject metaObject) {
         String now = DateUtil.now();
         this.strictInsertFill(metaObject, "createTime", String.class, now);
+        this.strictInsertFill(metaObject, "createUser", String.class, "skysys-sw");
         this.strictInsertFill(metaObject, "updateTime", String.class, now);
+        this.strictInsertFill(metaObject, "updateUser", String.class, "skysys-sw");
     }
 
     @Override
     public void updateFill(MetaObject metaObject) {
         String now = DateUtil.now();
         this.strictUpdateFill(metaObject, "updateTime", String.class, now);
+        this.strictInsertFill(metaObject, "updateUser", String.class, "skysys-sw");
     }
 }

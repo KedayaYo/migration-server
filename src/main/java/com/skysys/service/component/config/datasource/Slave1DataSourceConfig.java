@@ -4,8 +4,10 @@ import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.spring.boot3.autoconfigure.DruidDataSourceBuilder;
 import com.baomidou.mybatisplus.core.MybatisConfiguration;
 import com.baomidou.mybatisplus.core.config.GlobalConfig;
+import com.baomidou.mybatisplus.core.toolkit.GlobalConfigUtils;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
+import com.skysys.service.handler.DefaultDBFieldHandler;
 import com.skysys.service.utils.SpringUtils;
 import jakarta.annotation.Resource;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -65,7 +67,8 @@ public class Slave1DataSourceConfig {
         bean.setTypeAliasesPackage(typeAliasesPackage);
 
         // 设置全局配置 自定义sql注入
-        GlobalConfig globalConfig = new GlobalConfig();
+        // 获取mybatis-plus全局配置
+        GlobalConfig globalConfig = GlobalConfigUtils.defaults();
         bean.setGlobalConfig(globalConfig);
 
         // 添加mybatisPlus插件

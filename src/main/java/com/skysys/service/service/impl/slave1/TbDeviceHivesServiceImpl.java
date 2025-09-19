@@ -28,7 +28,7 @@ public class TbDeviceHivesServiceImpl extends ServiceImpl<TbDeviceHivesMapper, T
     private TbSysHivePlatformsMapper sysHivePlatformsMapper;
 
     @Override
-    public String selectBySiteId(String siteId) {
+    public String selectHiveIdBySiteId(String siteId) {
         TbDeviceHives hive = baseMapper.selectOne(
                 new LambdaQueryWrapper<TbDeviceHives>()
                         .eq(TbDeviceHives::getSiteID, siteId)

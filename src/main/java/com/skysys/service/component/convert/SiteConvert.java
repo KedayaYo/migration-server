@@ -60,10 +60,6 @@ public interface SiteConvert {
             // 控制模式映射
             @Mapping(source = "actionControlMode", target = "actionControlMode"),
 
-            // 用户信息映射
-            @Mapping(source = "createUser", target = "createUser"),
-            @Mapping(source = "updateUser", target = "updateUser"),
-
             // 站点类型映射
             @Mapping(source = "isSiteType", target = "isSiteType"),
 
@@ -80,9 +76,17 @@ public interface SiteConvert {
             @Mapping(source = "viewLiveConfig", target = "videoPullAddr", qualifiedByName = "buildVideoPullAddr"),
             @Mapping(source = "viewLiveConfig", target = "videoPushAddr", qualifiedByName = "buildVideoPushAddr"),
 
+            // 用户信息映射
+            // @Mapping(source = "createUser", target = "createUser"),
+            // @Mapping(source = "updateUser", target = "updateUser"),
+            @Mapping(target = "createUser", ignore = true),
+            @Mapping(target = "updateUser", ignore = true),
+
             // 时间字段映射 - 直接映射字符串
-            @Mapping(source = "createTime", target = "createTime"),
-            @Mapping(source = "updateTime", target = "updateTime"),
+            // @Mapping(source = "createTime", target = "createTime"),
+            // @Mapping(source = "updateTime", target = "updateTime"),
+            @Mapping(target = "createTime", ignore = true),
+            @Mapping(target = "updateTime", ignore = true),
 
             // 忽略需要单独设置的字段
             @Mapping(target = "uavId", ignore = true),

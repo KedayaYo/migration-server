@@ -4,8 +4,10 @@ import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.spring.boot3.autoconfigure.DruidDataSourceBuilder;
 import com.baomidou.mybatisplus.core.MybatisConfiguration;
 import com.baomidou.mybatisplus.core.config.GlobalConfig;
+import com.baomidou.mybatisplus.core.toolkit.GlobalConfigUtils;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
+import com.skysys.service.handler.DefaultDBFieldHandler;
 import jakarta.annotation.Resource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -17,7 +19,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Scope;
-import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -67,7 +68,9 @@ public class MasterDataSourceConfig {
         bean.setTypeAliasesPackage(typeAliasesPackage);
 
         // 设置全局配置 自定义sql注入
-        GlobalConfig globalConfig = new GlobalConfig();
+        // 获取mybatis-plus全局配置
+        GlobalConfig globalConfig = GlobalConfigUtils.defaults();
+        globalConfig.setMetaObjectHandler(new DefaultDBFieldHandler());
         bean.setGlobalConfig(globalConfig);
 
         // 添加mybatisPlus插件

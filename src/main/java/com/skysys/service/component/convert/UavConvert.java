@@ -35,14 +35,18 @@ public interface UavConvert {
             // 从TbSysDeviceModels获取的字段
             @Mapping(source = "deviceModel.brand", target = "brand"),
             @Mapping(source = "deviceModel.modelCode", target = "model"),
-            
+
             // 用户信息映射
-            @Mapping(source = "tbDeviceUavs.createUser", target = "createUser"),
-            @Mapping(source = "tbDeviceUavs.updateUser", target = "updateUser"),
-            
-            // 时间字段映射
-            @Mapping(source = "tbDeviceUavs.createTime", target = "createTime", dateFormat = "yyyy-MM-dd HH:mm:ss"),
-            @Mapping(source = "tbDeviceUavs.updateTime", target = "updateTime"),
+            // @Mapping(source = "createUser", target = "createUser"),
+            // @Mapping(source = "updateUser", target = "updateUser"),
+            @Mapping(target = "createUser", ignore = true),
+            @Mapping(target = "updateUser", ignore = true),
+
+            // 时间字段映射 - 直接映射字符串
+            // @Mapping(source = "createTime", target = "createTime"),
+            // @Mapping(source = "updateTime", target = "updateTime"),
+            @Mapping(target = "createTime", ignore = true),
+            @Mapping(target = "updateTime", ignore = true),
             
             // 删除标记映射
             @Mapping(source = "tbDeviceUavs.isDelete", target = "deleted"),

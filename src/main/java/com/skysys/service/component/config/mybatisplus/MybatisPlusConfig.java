@@ -1,6 +1,7 @@
 package com.skysys.service.component.config.mybatisplus;
 
 import cn.hutool.core.net.NetUtil;
+import com.baomidou.mybatisplus.core.config.GlobalConfig;
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.baomidou.mybatisplus.core.incrementer.DefaultIdentifierGenerator;
 import com.baomidou.mybatisplus.core.incrementer.IdentifierGenerator;
@@ -8,6 +9,7 @@ import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInterceptor;
 import com.skysys.service.handler.DefaultDBFieldHandler;
 import com.skysys.service.handler.MybatisExceptionHandler;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -16,6 +18,7 @@ import org.springframework.context.annotation.Configuration;
  * @description MybatisPlus 配置
  */
 @Configuration
+@MapperScan("com.skysys.service.mapper")
 public class MybatisPlusConfig {
     @Bean
     public MybatisPlusInterceptor mybatisPlusInterceptor() {
@@ -23,6 +26,13 @@ public class MybatisPlusConfig {
         // 乐观锁插件
         interceptor.addInnerInterceptor(optimisticLockerInnerInterceptor());
         return interceptor;
+    }
+
+    @Bean
+    public GlobalConfig globalconfig() {
+        GlobalConfig globalconfig = new GlobalConfig();
+        globalconfig.setMetaObjectHandler(metaObjectHandler());
+        return globalconfig;
     }
 
     /**

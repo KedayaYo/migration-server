@@ -29,18 +29,22 @@ public interface HiveConvert {
             
             // 从TbSysDeviceModels获取hiveModel字段
             @Mapping(source = "deviceModel.modelCode", target = "hiveModel"),
-            
+
             // 用户信息映射
-            @Mapping(source = "tbDeviceHives.createUser", target = "createUser"),
-            @Mapping(source = "tbDeviceHives.updateUser", target = "updateUser"),
-            
-            // 时间字段映射
-            @Mapping(source = "tbDeviceHives.createTime", target = "createTime"),
-            @Mapping(source = "tbDeviceHives.updateTime", target = "updateTime"),
+            // @Mapping(source = "createUser", target = "createUser"),
+            // @Mapping(source = "updateUser", target = "updateUser"),
+            @Mapping(target = "createUser", ignore = true),
+            @Mapping(target = "updateUser", ignore = true),
+
+            // 时间字段映射 - 直接映射字符串
+            // @Mapping(source = "createTime", target = "createTime"),
+            // @Mapping(source = "updateTime", target = "updateTime"),
+            @Mapping(target = "createTime", ignore = true),
+            @Mapping(target = "updateTime", ignore = true),
             
             // 删除标记映射 (isDelete -> deleted)
             @Mapping(source = "tbDeviceHives.isDelete", target = "deleted", qualifiedByName = "convertDeleteFlag"),
-            
+
             // 忽略的字段
             @Mapping(target = "id", ignore = true),
             @Mapping(target = "removeFault", ignore = true),
